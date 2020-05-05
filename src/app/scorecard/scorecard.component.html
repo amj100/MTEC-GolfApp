@@ -32,7 +32,7 @@
 			<input class="big" type="number" [value]="addArray(p['score'].slice(9,18))" disabled/>
 			<input class="big" type="number" [value]="addArray(p['score'])" disabled/>
 			<div class="endgame" *ngIf="isComplete(p['score'])"><div [ngClass]="{'bad': addArray(par) < addArray(p['score'])}">
-				{{ addArray(par) < addArray(p['score']) ? 'Above Par' : 'Below Par' }}
+				{{ addArray(par) < addArray(p['score']) ? 'Above Par' : 'Below Par' }}: {{ addArray(p['score']) - addArray(par) }} relative to par.
 			</div></div>
 		</mat-list>
 	</mat-card>
