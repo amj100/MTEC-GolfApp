@@ -20,13 +20,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select'
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
+import { AddArrayPipe } from './pipes/add-array.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		SetupComponent,
 		ScorecardComponent,
-		NewPlayerComponent
+		NewPlayerComponent,
+		AddArrayPipe
 	],
 	imports: [
 		BrowserModule,
