@@ -34,22 +34,18 @@
 	left: 0;
 	z-index: 5;
 }​
-.navbar button {
-	padding: 20px;
-	border: none;
-	background-color: #eee;
-	color: #333;
-	border-radius: 0;
-}
 .navbar button:hover {
 	color: #8f4949;
 	transition: color 0.1s;
 }
 .navbar h3 {
-	padding: 0 20px;
+	padding: 0;
+	padding-left: 20px;
 	color: #333;
 }
 .navbar h4 {
+	padding: 0;
+	padding-right: 20px;
 	color: #777;
     font-weight: 300;
 }
@@ -116,6 +112,7 @@ input.unfilled {
 }
 input:disabled {
 	background-color: #c5f5c2;
+	color: #333;
 }
 div.endgame {
 	position: fixed;
@@ -142,4 +139,29 @@ div.endgame > div {
 }
 div.endgame > div.bad {
 	background-color: #8f4949;
+}
+
+.navbar button {
+	padding: 20px;
+	border: none;
+	background-color: #eee;
+	color: #333;
+	border-radius: 0;
+	min-width: 120px;
+}
+.navbar > div {
+	width: calc(100% - 120px);
+	display: flex;
+	max-height: 76px;
+	justify-content: center;
+	align-items: center;
+}
+.navbar > div h3 {
+	width: 70%;
+	text-align: left;
+}
+.navbar > div h4 {
+	overflow-wrap: break-word;
+	width: 30%;
+	text-align: right;
 }
