@@ -117,3 +117,28 @@ input.unfilled {
 input:disabled {
 	background-color: #c5f5c2;
 }
+div.endgame {
+	position: fixed;
+	min-width: 100%;
+	left: 0;
+	min-height: 48px;
+	max-height: 48px;
+	background-color: #333a;
+	z-index: 4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+div.endgame > div {
+	color: #fff;
+	background-color: #66a96b;
+	border-radius: 4px;
+	text-align: center;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 10px;
+}
+div.endgame > div.bad {
+	background-color: #8f4949;
+}

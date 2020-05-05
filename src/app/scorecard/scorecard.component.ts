@@ -67,5 +67,14 @@ export class ScorecardComponent implements OnInit {
 		(<HTMLInputElement>document.getElementById(id)).value = e <= 0 ? 0 : e
 		console.log(this.players)
 	}
+	isComplete(scoreArray) {
+		let complete = true
+		scoreArray.forEach(e => {
+			if (e <= 0) {
+				complete = false
+			}
+		})
+		return complete
+	}
 
 }
