@@ -25,6 +25,7 @@ export class ScorecardComponent implements OnInit {
 	par = []
 	yards = []
 	hcp = []
+	showFinal: boolean = true
 
 	constructor(
 		public golfCoursesApiService: GolfCoursesApiService,
@@ -75,6 +76,9 @@ export class ScorecardComponent implements OnInit {
 			}
 		})
 		return complete
+	}
+	hideFinal(val) {
+		this.showFinal = val ? !val : false
 	}
 
 }

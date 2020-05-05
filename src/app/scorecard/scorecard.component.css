@@ -128,6 +128,7 @@ div.endgame {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
 div.endgame > div {
 	color: #fff;
