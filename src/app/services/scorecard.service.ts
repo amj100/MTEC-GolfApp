@@ -13,6 +13,7 @@ export class ScorecardService {
 	players: Player[] = []
 	course: string = ""
 	tee: string = ""
+	sessionId: string = ""
 	scorecard: object = {}
 
 	constructor(

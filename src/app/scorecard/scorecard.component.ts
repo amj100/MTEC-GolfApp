@@ -3,6 +3,7 @@ import { GolfCoursesApiService } from '../services/golf-courses-api.service';
 import { ScorecardService } from '../services/scorecard.service';
 import { Router } from '@angular/router';
 import { Player } from '../interfaces/player';
+import { SessionServiceService } from '../services/session-service.service'
 
 @Component({
 	selector: 'app-scorecard',
@@ -30,14 +31,20 @@ export class ScorecardComponent implements OnInit {
 	constructor(
 		public golfCoursesApiService: GolfCoursesApiService,
 		public scorecardService: ScorecardService,
-		private router: Router
+		private router: Router,
+		public sessionService: SessionServiceService
 	) { }
 
 	ngOnInit(): void {
 		if (this.scorecardService.scorecardReady()) {
+			this.firebaseCode = this.scorecardService.sessionId
 			this.tee = this.scorecardService.tee
 			this.players = this.scorecardService.players
-			this.players.forEach(p => p["score"] = Array(18).fill(0))
+			this.players.forEach(p => {
+				if (p["score"].length < 18) {
+					p["score"] = Array(18).fill(0)
+				}
+			})
 			this.scorecardService.getScorecard().subscribe(data => {
 				this.scorecard = data["data"] ? data["data"] : data
 				this.name = this.scorecard["name"]
@@ -66,6 +73,14 @@ export class ScorecardComponent implements OnInit {
 	}
 	checkInput(id, e) {
 		(<HTMLInputElement>document.getElementById(id)).value = e <= 0 ? 0 : e
+		if (this.scorecardService.sessionId !== "") {
+			this.sessionService.editSession(this.scorecardService.sessionId, {
+				sessionId: this.scorecardService.sessionId,
+				players: this.scorecardService.players,
+				course: this.scorecardService.course,
+				tee: this.scorecardService.tee
+			})
+		}
 		//console.log(this.players)
 	}
 	isComplete(scoreArray) {

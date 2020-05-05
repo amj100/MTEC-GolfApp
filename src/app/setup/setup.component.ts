@@ -6,6 +6,8 @@ import { NewPlayerComponent } from './new-player/new-player.component';
 import { GolfCoursesApiService } from '../services/golf-courses-api.service';
 import { ScorecardService } from '../services/scorecard.service';
 import { Router } from '@angular/router';
+import { SessionServiceService } from '../services/session-service.service';
+import { Session } from '../interfaces/session';
 
 @Component({
 	selector: 'app-setup',
@@ -26,15 +28,23 @@ export class SetupComponent implements OnInit {
 	course: string = ""
 	tees: string[] = ["Pro", "Champion", "Men", "Women"]
 	tee: string = ""
-	continueGame = ""
+	sessionId = ""
+	newSessionId = ""
+	sessionAvailable: boolean = false
+
+	sessionList: Session[] = []
 
 	constructor(
 		public dialog: MatDialog,
 		public golfCoursesApiService: GolfCoursesApiService,
 		public scorecardService: ScorecardService,
+		public sessionService: SessionServiceService,
 		private router: Router
 	) { }
 	ngOnInit(): void {
+		this.sessionService.getSessions().subscribe(data => {
+			this.sessionList = data
+		})
 		this.golfCoursesApiService.getCourses().subscribe(data => {
 			this.courses = data["courses"]
 		})
@@ -86,12 +96,35 @@ export class SetupComponent implements OnInit {
 		this.tee = t
 	}
 	continueFirebaseChange() {
-		this.continueGame = (<HTMLInputElement>document.getElementById("continueFirebaseCode")).value
+		this.sessionAvailable = false
+		this.sessionId = (<HTMLInputElement>document.getElementById("continueFirebaseCode")).value
+		this.sessionList.forEach(s => {
+			if (s["sessionId"] === this.sessionId) {
+				this.sessionAvailable = true
+			}
+		})
+	}
+	continueGame() {
+		this.sessionList.forEach(s => {
+			if (s["sessionId"] === this.sessionId) {
+				this.scorecardService.course = s["course"]
+				this.scorecardService.tee = s["tee"]
+				this.scorecardService.players = s["players"]
+				this.scorecardService.sessionId = s["sessionId"]
+				this.router.navigate(['/scorecard'])
+			}
+		})
+	}
+	startFirebase() {
+		this.sessionService.addSession().then(res => {
+			this.newSessionId = res["XT"]["clientId"]
+		})
 	}
 	newGame() {
 		this.scorecardService.course = this.course
 		this.scorecardService.tee = this.tee
 		this.scorecardService.players = this.players
+		this.scorecardService.sessionId = this.newSessionId
 		this.router.navigate(['/scorecard'])
 	}
 }

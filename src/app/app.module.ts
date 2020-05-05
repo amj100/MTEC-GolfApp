@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { environment } from 'src/environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -21,6 +23,9 @@ import { MatSelectModule } from '@angular/material/select'
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { AddArrayPipe } from './pipes/add-array.pipe';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
 	declarations: [
@@ -45,7 +50,9 @@ import { AddArrayPipe } from './pipes/add-array.pipe';
 		ReactiveFormsModule,
 		MatSelectModule,
 		HttpClientModule,
-		MatListModule
+		MatListModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

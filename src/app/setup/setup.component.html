@@ -44,7 +44,12 @@
 			</div>
 
 			<mat-divider></mat-divider>
-			<h3>firebase stuff</h3>
+			<div class="main-firebase">
+				<button *ngIf="newSessionId === ''" (click)="startFirebase()" mat-raised-button class="firebase-btn">
+					Use Firebase
+				</button>
+				<h3 class="firebase-code" *ngIf="newSessionId !== ''"> Firebase Session Id: {{ newSessionId }} </h3>
+			</div>
 			<mat-divider></mat-divider>
 			<button (click)="newGame()" class="submit" mat-raised-button color="accent" [disabled]="players.length < 1 || tee == '' || course == ''">
 				Start Game
@@ -55,7 +60,7 @@
 				<mat-label>Firebase Code</mat-label>
 				<input matInput id="continueFirebaseCode" (keyup)="continueFirebaseChange()"/>
 			</mat-form-field>
-			<button class="submit" mat-raised-button color="accent" [disabled]="continueGame == ''">
+			<button class="submit" (click)="continueGame()" mat-raised-button color="accent" [disabled]="!sessionAvailable">
 				Start Game
 			</button>
 		</div>
