@@ -117,7 +117,7 @@ export class SetupComponent implements OnInit {
 	}
 	startFirebase() {
 		this.sessionService.addSession().then(res => {
-			this.newSessionId = res["XT"]["clientId"]
+			this.newSessionId = res.id
 		})
 	}
 	newGame() {

@@ -62,6 +62,14 @@ export class ScorecardComponent implements OnInit {
 		else {
 			this.router.navigate(["/setup"])
 		}
+		if (this.scorecardService.sessionId !== "") {
+			this.sessionService.editSession(this.scorecardService.sessionId, {
+				sessionId: this.scorecardService.sessionId,
+				players: this.scorecardService.players,
+				course: this.scorecardService.course,
+				tee: this.scorecardService.tee
+			})
+		}
 	}
 	exitGame() {
 		this.router.navigate(["/setup"])

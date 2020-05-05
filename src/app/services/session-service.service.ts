@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Session } from '../interfaces/session';
 
@@ -15,7 +15,7 @@ export class SessionServiceService {
 	getSessions(): Observable<Session[]> {
 		return this.af.collection<Session>("sessions").valueChanges()
 	}
-	addSession(): Promise<unknown> {
+	addSession(): Promise<DocumentReference> {
 		return this.af.collection("sessions").add({})
 	}
 	editSession(sessionId: string, newValue: Session): void {
