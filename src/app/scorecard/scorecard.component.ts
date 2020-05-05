@@ -65,7 +65,7 @@ export class ScorecardComponent implements OnInit {
 	}
 	checkInput(id, e) {
 		(<HTMLInputElement>document.getElementById(id)).value = e <= 0 ? 0 : e
-		console.log(this.players)
+		//console.log(this.players)
 	}
 	isComplete(scoreArray) {
 		let complete = true
